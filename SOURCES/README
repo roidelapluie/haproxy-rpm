@@ -1,0 +1,54 @@
+Package %{?scl_name} provides HAProxy load balancer delivered as a
+Software Collection (SCL). For more information about Software
+Collections, see the scl(1) man page. By installing the %{?scl_name}
+collection, you will get the minimum working set of packages to have a
+working HAProxy load balancer.
+
+%if 0%{?rhel} >= 7 || 0%{?fedora} >= 15
+Usage: systemctl start %{?scl_prefix}haproxy
+%else
+Usage: service %{?scl_prefix}haproxy start
+%endif
+
+Software Collections allow you to build and execute applications which
+are not located in the filesystem root hierarchy, but are stored in an
+alternative location, which is %{_scl_root} in case of the
+%{?scl_name} collection.
+
+HAProxy is a free, very fast and reliable solution offering high
+availability, load balancing, and proxying for TCP and HTTP-based
+applications.
+
+When you want to work with the %{?scl_name} collection, use the scl
+utility (see the scl(1) man page for usage) to enable the scl
+environment. The only exception is starting and stopping
+%{?scl_prefix}haproxy daemon, where SCL environment is enabled
+implicitely within the SysV init script or systemd unit file.
+
+Configuration for the %{?scl_name} software collection is located
+under %{_sysconfdir}.
+
+Examples:
+scl enable %{?scl_name} 'command --arg'
+  Run a specific command with the argument --arg within the %{?scl_name}
+  software collections environment.
+
+scl enable %{?scl_name} bash
+  Run an interactive shell with the %{?scl_name} software collection enabled.
+
+%if 0%{?rhel} >= 7 || 0%{?fedora} >= 15
+systemctl start %{?scl_prefix}haproxy
+%else
+service %{?scl_prefix}haproxy start
+%endif
+    Starts the HAProxy service from %{?scl_name} software collection.
+
+scl enable %{?scl_name} 'man haproxy'
+  Show man pages for the haproxy command, which is a part of the
+  %{?scl_name} software collection.
+
+Files:
+%{_scl_scripts}/service-environment
+Define which software collections should be enabled for the daemon process.
+
+Report bugs to <http://bugzilla.redhat.com>.
