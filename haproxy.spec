@@ -17,7 +17,7 @@
 
 Name:           %{?scl_prefix}haproxy
 Version:        2.0.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -74,7 +74,7 @@ regparm_opts=
 regparm_opts="USE_REGPARM=1"
 %endif
 
-%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_OPENSSL=1 USE_PCRE=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}"
+%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_OPENSSL=1 USE_PCRE=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}" EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
 
 pushd contrib/halog
 %{__make} halog OPTIMIZE="%{optflags}" LDFLAGS=
@@ -198,6 +198,12 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-2
+- Enable Prometheus
+
+* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-1
+- Update to 2.0.10
+
 * Wed Jan 09 2019 Ryan O'Hara <rohara@redhat.com> - 1.8.17-1
 - Update to 1.8.17 (#1660514)
 - Resolve CVE-2018-20615 (#1663084)
