@@ -17,7 +17,7 @@
 
 Name:           %{?scl_prefix}haproxy
 Version:        2.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -31,6 +31,7 @@ Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
 
+BuildRequires:  lua-devel
 BuildRequires:  pcre-devel
 BuildRequires:  zlib-devel
 BuildRequires:  openssl-devel
@@ -74,7 +75,7 @@ regparm_opts=
 regparm_opts="USE_REGPARM=1"
 %endif
 
-%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_OPENSSL=1 USE_PCRE=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}" EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
+%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_LUA=1 USE_OPENSSL=1 USE_PCRE=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}" EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
 
 pushd contrib/halog
 %{__make} halog OPTIMIZE="%{optflags}" LDFLAGS=
@@ -198,6 +199,12 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-2
+- Enable LUA
+
+* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-1
+- Bump to 2.1.0
+
 * Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-2
 - Enable Prometheus
 
