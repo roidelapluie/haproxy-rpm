@@ -16,15 +16,15 @@
 %endif
 
 Name:           %{?scl_prefix}haproxy
-Version:        2.0.10
-Release:        2%{?dist}
+Version:        2.1.0
+Release:        1%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
 License:        GPLv2+
 
 URL:            http://www.haproxy.org/
-Source0:        https://www.haproxy.org/download/2.0/src/%{pkg_name}-%{version}.tar.gz
+Source0:        https://www.haproxy.org/download/2.1/src/%{pkg_name}-%{version}.tar.gz
 Source1:        %{pkg_name}.service
 Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
