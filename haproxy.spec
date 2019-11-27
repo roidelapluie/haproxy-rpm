@@ -34,7 +34,7 @@ Source5:        halog.1
 Patch0:        fa137e3b5c994508370e0cd2396ece081a1316c4.patch
 
 %{?el8:BuildRequires:  lua-devel}
-%{?el7:BuildRequires:  lua-static}
+%{?el7:BuildRequires:  lua53-static}
 BuildRequires:  pcre-devel
 BuildRequires:  zlib-devel
 BuildRequires:  openssl-devel
