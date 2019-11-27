@@ -217,7 +217,7 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 * Tue Nov 26 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-2
 - Enable Prometheus
 
-* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-1
+* Tue Nov 26 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-1
 - Update to 2.0.10
 
 * Wed Jan 09 2019 Ryan O'Hara <rohara@redhat.com> - 1.8.17-1
