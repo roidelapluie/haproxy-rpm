@@ -17,7 +17,7 @@
 
 Name:           %{?scl_prefix}haproxy
 Version:        2.1.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -203,6 +203,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Wed Nov 27 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-6
+- Use static LUA in epel7
+
 * Wed Nov 27 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-5
 - Use static LUA in epel7
 
