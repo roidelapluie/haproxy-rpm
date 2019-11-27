@@ -17,7 +17,7 @@
 
 Name:           %{?scl_prefix}haproxy
 Version:        2.1.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -30,6 +30,8 @@ Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
+
+Patch0:        fa137e3b5c994508370e0cd2396ece081a1316c4.patch
 
 %{?el8:BuildRequires:  lua-devel}
 BuildRequires:  pcre-devel
@@ -68,6 +70,7 @@ availability environments. Indeed, it can:
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
+%patch0 -p1
 
 %build
 regparm_opts=
@@ -199,16 +202,19 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
-* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-3
+* Wed Nov 27 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-4
+- Cherry pick: h1: Don't test the host header during response parsing
+
+* Tue Nov 26 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-3
 - Enable LUA for el8 only
 
-* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-2
+* Tue Nov 26 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-2
 - Enable LUA
 
-* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-1
+* Tue Nov 26 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-1
 - Bump to 2.1.0
 
-* Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-2
+* Tue Nov 26 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-2
 - Enable Prometheus
 
 * Tue Nov 29 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.0.10-1
