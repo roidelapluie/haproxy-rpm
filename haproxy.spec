@@ -7,7 +7,7 @@
 %define haproxy_confdir %{_sysconfdir}/haproxy
 %define haproxy_datadir %{_datadir}/haproxy
 
-%global _hardened_build 1
+%{?el8:%global _hardened_build 1}
 
 %if 0%{!?scl:1}
 %global _root_sbindir %{_sbindir}
@@ -17,7 +17,7 @@
 
 Name:           %{?scl_prefix}haproxy
 Version:        2.1.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -35,6 +35,7 @@ Patch0:        fa137e3b5c994508370e0cd2396ece081a1316c4.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
+%{?el7:BuildRequires:  lua53-devel}
 BuildRequires:  pcre-devel
 BuildRequires:  zlib-devel
 BuildRequires:  openssl-devel
@@ -79,7 +80,7 @@ regparm_opts=
 regparm_opts="USE_REGPARM=1"
 %endif
 
-%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_LUA=1 USE_OPENSSL=1 USE_PCRE=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}" EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
+%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_LUA=1 ${?el7:LUA_LIB_NAME=:liblua.a} USE_OPENSSL=1 USE_PCRE=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}" EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
 
 pushd contrib/halog
 %{__make} halog OPTIMIZE="%{optflags}" LDFLAGS=
@@ -203,6 +204,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Thu Nov 28 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-7
+- Use static LUA in epel7
+
 * Wed Nov 27 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-6
 - Use static LUA in epel7
 
