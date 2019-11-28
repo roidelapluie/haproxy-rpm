@@ -7,7 +7,7 @@
 %define haproxy_confdir %{_sysconfdir}/haproxy
 %define haproxy_datadir %{_datadir}/haproxy
 
-%{?el8:%global _hardened_build 1}
+%global _hardened_build 1
 
 %if 0%{!?scl:1}
 %global _root_sbindir %{_sbindir}
@@ -17,7 +17,7 @@
 
 Name:           %{?scl_prefix}haproxy
 Version:        2.1.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -204,6 +204,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Thu Nov 28 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-8
+- Harden epel7 build
+
 * Thu Nov 28 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-7
 - Use static LUA in epel7
 
