@@ -16,8 +16,8 @@
 %endif
 
 Name:           %{?scl_prefix}haproxy
-Version:        2.1.0
-Release:        8%{?dist}
+Version:        2.1.1
+Release:        1%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -30,8 +30,6 @@ Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
-
-Patch0:        fa137e3b5c994508370e0cd2396ece081a1316c4.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
@@ -72,7 +70,6 @@ availability environments. Indeed, it can:
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%patch0 -p1
 
 %build
 regparm_opts=
@@ -204,6 +201,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Thu Nov 28 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.1-1
+- Update to HAProxy 2.1.1
+
 * Thu Nov 28 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-8
 - Harden epel7 build
 
