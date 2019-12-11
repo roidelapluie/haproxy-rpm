@@ -201,7 +201,7 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
-* Thu Nov 28 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.1-1
+* Wed Dec 11 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.1-1
 - Update to HAProxy 2.1.1
 
 * Thu Nov 28 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.0-8
