@@ -31,9 +31,13 @@ Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
 
-%{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
 %{?el7:BuildRequires:  lua53-devel}
+
+%if (0%{?rhel} == 8 || 0%{?fedora} >= 29)
+BuildRequires: lua-devel
+%endif
+
 BuildRequires:  pcre-devel
 BuildRequires:  zlib-devel
 BuildRequires:  openssl-devel
