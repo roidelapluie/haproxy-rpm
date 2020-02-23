@@ -16,7 +16,7 @@
 %endif
 
 Name:           %{?scl_prefix}haproxy
-Version:        2.1.2
+Version:        2.1.3
 Release:        1%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
@@ -31,9 +31,13 @@ Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
 
-%{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
 %{?el7:BuildRequires:  lua53-devel}
+
+%if (0%{?rhel} == 8 || 0%{?fedora} >= 29)
+BuildRequires: lua-devel
+%endif
+
 BuildRequires:  pcre-devel
 BuildRequires:  zlib-devel
 BuildRequires:  openssl-devel
@@ -77,7 +81,7 @@ regparm_opts=
 regparm_opts="USE_REGPARM=1"
 %endif
 
-%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_LUA=1 %{?el7:LUA_LIB_NAME=:liblua.a} USE_OPENSSL=1 USE_PCRE=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}" EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
+%{__make} %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" USE_LUA=1 %{?el7:LUA_LIB_NAME=:liblua.a} USE_OPENSSL=1 USE_PCRE=1 USE_PCRE_JIT=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_SYSTEMD=1 USE_LINUX_TPROXY=1 USE_GETADDRINFO=1 ${regparm_opts} ADDINC="%{optflags}" ADDLIB="%{__global_ldflags}" EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
 
 pushd contrib/halog
 %{__make} halog OPTIMIZE="%{optflags}" LDFLAGS=
@@ -201,6 +205,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Sun Feb 23 2020 Ilya Shipitcin <chipitsine@gmail.com> - 2.1.3-1
+- Update to HAProxy 2.1.3
+
 * Thu Dec 26 2019 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.1-1
 - Update to HAProxy 2.1.2
 
