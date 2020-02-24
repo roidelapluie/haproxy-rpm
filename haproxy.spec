@@ -34,7 +34,7 @@ Source5:        halog.1
 %{?el7:BuildRequires:  lua53-static}
 %{?el7:BuildRequires:  lua53-devel}
 
-%if (0%{?rhel} == 8 || 0%{?fedora} >= 29)
+%if 0%{?rhel} == 8 || 0%{?fedora} >= 29
 BuildRequires: lua-devel
 %endif
 
