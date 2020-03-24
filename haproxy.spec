@@ -17,7 +17,7 @@
 
 Name:           %{?scl_prefix}haproxy
 Version:        2.1.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
 Group:          System Environment/Daemons
@@ -30,6 +30,8 @@ Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
+
+Patch0: 31e91e5929fbb3b12171ad91fca72d217ad6ad9b.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
@@ -70,6 +72,7 @@ availability environments. Indeed, it can:
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
+%patch0 -p1
 
 %build
 regparm_opts=
@@ -201,6 +204,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Tue Mar 24 2020 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.3-2
+- BUG/MINOR: http: http-request replace-path duplicates the query string
+
 * Mon Mar 23 2020 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.3-1
 - Update to HAProxy 2.1.3
 
