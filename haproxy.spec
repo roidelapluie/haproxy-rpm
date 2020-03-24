@@ -31,7 +31,8 @@ Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
 
-Patch0: 31e91e5929fbb3b12171ad91fca72d217ad6ad9b.patch
+Patch0: 48517d84c9976adeb71f0517ed02a79ad8ea445f.patch
+Patch1: 31e91e5929fbb3b12171ad91fca72d217ad6ad9b.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
@@ -73,6 +74,7 @@ availability environments. Indeed, it can:
 %prep
 %setup -q -n %{pkg_name}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 regparm_opts=
