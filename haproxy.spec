@@ -16,7 +16,7 @@
 %endif
 
 Name:           %{?scl_prefix}haproxy
-Version:        2.1.4
+Version:        2.1.5
 Release:        1%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
@@ -201,6 +201,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Thu May 29 2020 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.5-1
+- Update to HAProxy 2.1.5
+
 * Thu Apr 2 2020 Julien Pivotto <roidelapluie@inuits.eu> - 2.1.4-1
 - Update to HAProxy 2.1.4
 
