@@ -16,7 +16,7 @@
 %endif
 
 Name:           %{?scl_prefix}haproxy
-Version:        2.2.4
+Version:        2.2.5
 Release:        1%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
@@ -30,6 +30,7 @@ Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
+Patch0: 0001-Add-level-7-retries-on-http-error-401-403.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
@@ -70,6 +71,7 @@ availability environments. Indeed, it can:
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
+%patch0 -p1
 
 %build
 regparm_opts=
