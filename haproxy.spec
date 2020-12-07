@@ -205,7 +205,7 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 - Update to HAProxy 2.2.6
 - Back to upstream, patche applied in 2.2.5-1 is no longer applied.
 
-* Thu Nov 12 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.5-1
+* Thu Nov 12 2020 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.5-1
 - Update to HAProxy 2.2.5
 - Patched to add level 7 retries on http error 401, 403
 
