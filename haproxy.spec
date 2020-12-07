@@ -16,7 +16,7 @@
 %endif
 
 Name:           %{?scl_prefix}haproxy
-Version:        2.2.5
+Version:        2.2.6
 Release:        1%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
@@ -30,7 +30,6 @@ Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
-Patch0: 0001-Add-level-7-retries-on-http-error-401-403.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
@@ -71,7 +70,6 @@ availability environments. Indeed, it can:
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%patch0 -p1
 
 %build
 regparm_opts=
@@ -203,6 +201,14 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Mon Dec 7 2020 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.6-1
+- Update to HAProxy 2.2.6
+- Back to upstream, patche applied in 2.2.5-1 is no longer applied.
+
+* Thu Nov 12 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.5-1
+- Update to HAProxy 2.2.5
+- Patched to add level 7 retries on http error 401, 403
+
 * Wed Sep 30 2020 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.4-1
 - Update to HAProxy 2.2.4
 
