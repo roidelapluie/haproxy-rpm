@@ -1,19 +1,19 @@
-From 7cd526913ad9066827ff7f22ee8838eeb482bd24 Mon Sep 17 00:00:00 2001
+From 654181ae6a118e020bcd31663dbb9da67bfe7a18 Mon Sep 17 00:00:00 2001
 From: Julien Pivotto <roidelapluie@inuits.eu>
-Date: Wed, 13 Jan 2021 00:17:33 +0100
+Date: Wed, 13 Jan 2021 09:37:28 +0100
 Subject: [PATCH] Revert "BUG/MINOR: dns: SRV records ignores duplicated AR
  records"
 
-This reverts commit 8461b9ea7882fc9ca3436316c3ae6a1d01b23085.
+This reverts commit 45b6d2d4780231740dac6f682c86a00327baa867.
 ---
  src/dns.c | 5 -----
  1 file changed, 5 deletions(-)
 
 diff --git a/src/dns.c b/src/dns.c
-index 02c5ea239..c38152d7f 100644
+index 90efdad34..3d484263c 100644
 --- a/src/dns.c
 +++ b/src/dns.c
-@@ -955,10 +955,6 @@ static int dns_validate_dns_response(unsigned char *resp, unsigned char *bufend,
+@@ -1027,10 +1027,6 @@ static int dns_validate_dns_response(unsigned char *resp, unsigned char *bufend,
  				dns_answer_record->data_len = len;
  				memcpy(dns_answer_record->target, tmpname, len);
  				dns_answer_record->target[len] = 0;
@@ -24,7 +24,7 @@ index 02c5ea239..c38152d7f 100644
  				break;
  
  			case DNS_RTYPE_AAAA:
-@@ -1208,7 +1204,6 @@ static int dns_validate_dns_response(unsigned char *resp, unsigned char *bufend,
+@@ -1280,7 +1276,6 @@ static int dns_validate_dns_response(unsigned char *resp, unsigned char *bufend,
  			// looking for the SRV record in the response list linked to this additional record
  			list_for_each_entry(tmp_record, &dns_p->answer_list, list) {
  				if (tmp_record->type == DNS_RTYPE_SRV &&
