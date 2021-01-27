@@ -30,7 +30,6 @@ Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
-Patch0: 0001-Revert-BUG-MINOR-dns-SRV-records-ignores-duplicated-.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
@@ -71,7 +70,6 @@ availability environments. Indeed, it can:
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%patch0 -p1
 
 %build
 regparm_opts=
@@ -201,6 +199,10 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %if 0%{?scl:1}
 %scl_syspaths_files -n %{pkg_name}
 %endif
+
+%changelog
+* Wed Jan 27 2021 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.8-1
+- Update to HAProxy 2.2.8
 
 %changelog
 * Wed Jan 13 2021 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.7-1
