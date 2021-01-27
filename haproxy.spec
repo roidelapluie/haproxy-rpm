@@ -204,7 +204,6 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 * Wed Jan 27 2021 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.8-1
 - Update to HAProxy 2.2.8
 
-%changelog
 * Wed Jan 13 2021 Julien Pivotto <roidelapluie@inuits.eu> - 2.2.7-1
 - Update to HAProxy 2.2.7
 - Revert a commit that caused segfaults when using DNS: https://www.mail-archive.com/haproxy@formilux.org/msg39447.html
