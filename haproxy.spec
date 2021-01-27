@@ -16,7 +16,7 @@
 %endif
 
 Name:           %{?scl_prefix}haproxy
-Version:        2.3.3
+Version:        2.3.4
 Release:        1%{?dist}
 Summary:        TCP/HTTP proxy and load balancer for high availability environments
 
@@ -30,7 +30,6 @@ Source2:        %{pkg_name}.cfg
 Source3:        %{pkg_name}.logrotate
 Source4:        %{pkg_name}.sysconfig
 Source5:        halog.1
-Patch0: 0001-Revert-BUG-MINOR-dns-SRV-records-ignores-duplicated-.patch
 
 %{?el8:BuildRequires:  lua-devel}
 %{?el7:BuildRequires:  lua53-static}
@@ -71,7 +70,6 @@ availability environments. Indeed, it can:
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%patch0 -p1
 
 %build
 regparm_opts=
@@ -203,6 +201,9 @@ restorecon "%{_unitdir}/%{name}.service" >/dev/null 2>&1 || :
 %endif
 
 %changelog
+* Wed Jan 27 2021 Julien Pivotto <roidelapluie@inuits.eu> - 2.3.4-1
+- Update to HAProxy 2.3.4
+
 * Wed Jan 13 2021 Julien Pivotto <roidelapluie@inuits.eu> - 2.3.3-1
 - Update to HAProxy 2.3.3
 - Revert a commit that caused segfaults when using DNS: https://www.mail-archive.com/haproxy@formilux.org/msg39447.html
